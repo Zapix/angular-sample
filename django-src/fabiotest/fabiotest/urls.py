@@ -17,11 +17,12 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
 
-from books.views import BookViewSet
+from books import views as books_views
+from profiles import views as profiles_views
 
 
 router = DefaultRouter()
-router.register(r'books', BookViewSet)
+router.register(r'books', books_views.BookViewSet)
 
 urlpatterns = [
     url(
@@ -31,6 +32,21 @@ urlpatterns = [
     url(
         r'^api/v1/',
         include(router.urls)
+    ),
+    url(
+        r'^api/v1/register/$',
+        profiles_views.RegisterUserView.as_view(),
+        name='user-register'
+    ),
+    url(
+        r'^api/v1/user/$',
+        profiles_views.UserView.as_view(),
+        name='user-info'
+    ),
+    url(
+        r'^api/v1/user/password/',
+        profiles_views.PasswordView.as_view(),
+        name='user-change-password'
     ),
     url(
         r'^api-auth/',

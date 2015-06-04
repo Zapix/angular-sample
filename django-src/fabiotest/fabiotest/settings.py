@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 import os
+import datetime
 from configurations import Configuration, values
 
 
@@ -87,6 +88,10 @@ class Common(Configuration):
             'rest_framework.authentication.BasicAuthentication',
             'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         ),
+    }
+
+    JWT_AUTH = {
+        'JWT_EXPIRATION_DELTA': datetime.timedelta(days=14),
     }
 
 

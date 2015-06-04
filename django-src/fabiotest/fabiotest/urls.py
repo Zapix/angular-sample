@@ -17,15 +17,17 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
 
+from books.views import BookViewSet
+
 
 router = DefaultRouter()
+router.register(r'books', BookViewSet)
 
 urlpatterns = [
     url(
         r'^admin/',
         include(admin.site.urls)
     ),
-
     url(
         r'^api/v1/',
         include(router.urls)
@@ -40,5 +42,9 @@ urlpatterns = [
     url(
         r'^api-token-auth/',
         'rest_framework_jwt.views.obtain_jwt_token'
-    )
+    ),
+    url(
+        r'^api-token-verify/',
+        'rest_framework_jwt.views.verify_jwt_token'
+    ),
 ]

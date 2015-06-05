@@ -37,7 +37,9 @@
       <ul class="nav navbar-nav navbar-right">
         <li ng-show="!token"><a href="#/signin">Login</a></li>
         <li ng-show="!token"><a href="#/signup">Sign Up</a></li>
-        <li ng-show="token"><a href="#/signout" ng-click="logout()">Logout</a></li>
+
+        <li ng-show="token"><a href="#/profile">Profile</a></li>
+        <li ng-show="token"><a href="#/signout">Logout</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
@@ -57,7 +59,8 @@
   <script src="view1/view1.js"></script>
   <script src="view2/view2.js"></script>
   <script src="signup/signup.js"></script>
-  <script src="signinout/signin.js"></script>
+  <script src="signinout/signinout.js"></script>
+  <script src="profile/profile.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>

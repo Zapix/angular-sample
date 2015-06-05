@@ -11,7 +11,8 @@ angular
       return {
         URLS: {
           SIGNUP: 'http://localhost:8000/api/v1/register/',
-          SIGNIN: 'http://localhost:8000/api-token-auth/'
+          SIGNIN: 'http://localhost:8000/api-token-auth/',
+          USER: 'http://localhost:8000/api/v1/user/'
         }
       };
     }

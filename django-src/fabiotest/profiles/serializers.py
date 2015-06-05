@@ -6,7 +6,10 @@ from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
 
-    birthday = serializers.DateField(source='profile.birthday')
+    birthday = serializers.DateField(
+        source='profile.birthday',
+        allow_null=True
+    )
 
     class Meta:
         model = User

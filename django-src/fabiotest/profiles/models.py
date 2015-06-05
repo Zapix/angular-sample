@@ -10,7 +10,7 @@ class UserProfile(models.Model):
         auto_created=True,
         primary_key=True
     )
-    birthday= models.DateField(
+    birthday = models.DateField(
         'Birthday',
         blank=True,
         null=True

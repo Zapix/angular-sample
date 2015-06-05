@@ -33,6 +33,7 @@ class Common(Configuration):
         'django.contrib.messages',
         'django.contrib.staticfiles',
 
+        'corsheaders',
         'rest_framework',
 
         'profiles',
@@ -41,6 +42,7 @@ class Common(Configuration):
 
     MIDDLEWARE_CLASSES = (
         'django.contrib.sessions.middleware.SessionMiddleware',
+        'corsheaders.middleware.CorsMiddleware',
         'django.middleware.common.CommonMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -99,7 +101,7 @@ class Dev(Common):
     """
     The in-development settings and the default configuration.
     """
-    pass
+    CORS_ORIGIN_ALLOW_ALL = True
 
 
 class Prod(Common):

@@ -33,7 +33,6 @@ angular
       'constants',
       function($scope, $http, $location, constants) {
         $scope.serverErrors = {};
-        console.log(constants);
         $scope.createUser = function(form, user) {
           if (!form.$valid || user.password1 != user.password2 ) {
             return;
@@ -44,15 +43,11 @@ angular
               constants.URLS.SIGNUP,
               user
             )
-            .success(function(data, status) {
+            .success(function() {
               $location.path('/signup-success');
             })
-            .error(function(data, status) {
-              if (status == 400) {
-                $scope.serverErrors = data;
-              } else {
-                alert("Something goes wrong. Please try to reload page");
-              }
+            .error(function(data) {
+              $scope.serverErrors = data;
             });
         };
       }

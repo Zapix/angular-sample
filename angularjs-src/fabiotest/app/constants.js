@@ -13,7 +13,8 @@ angular
           SIGNUP: 'http://localhost:8000/api/v1/register/',
           SIGNIN: 'http://localhost:8000/api-token-auth/',
           USER: 'http://localhost:8000/api/v1/user/',
-          CHANGE_PASSWORD: 'http://localhost:8000/api/v1/user/password/'
+          CHANGE_PASSWORD: 'http://localhost:8000/api/v1/user/password/',
+          BOOK_LIST: 'http://localhost:8000/api/v1/books/'
         }
       };
     }

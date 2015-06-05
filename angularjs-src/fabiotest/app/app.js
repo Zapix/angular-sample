@@ -15,11 +15,10 @@ angular
       'ngStorage',
       'ngRoute',
       'myApp.constants',
-      'myApp.view1',
-      'myApp.view2',
       'myApp.signup',
       'myApp.signinout',
       'myApp.profile',
+      'myApp.books',
       'myApp.version'
     ]
   )
@@ -28,7 +27,7 @@ angular
       '$routeProvider',
       '$httpProvider',
       function($routeProvider, $httpProvider) {
-        $routeProvider.otherwise({redirectTo: '/view1'});
+        $routeProvider.otherwise({redirectTo: '/'});
         $httpProvider.interceptors.push(
           [
             '$q',
@@ -47,6 +46,9 @@ angular
                   if (response.status === 401 || response.status === 403) {
                     $location.path('/signin');
                   }
+                  if (response.status !== 400) {
+                    alert("Something goes wrong. Please try to reload page");
+                  }
                   return $q.reject(response);
                 }
               };
@@ -56,6 +58,18 @@ angular
       }
     ]
   )
-  .run(function($rootScope, $localStorage) {
-    $rootScope.token = $localStorage.token;
-  });
+  .run(
+    [
+      '$rootScope',
+      '$location',
+      '$localStorage',
+      function($rootScope, $location, $localStorage) {
+        $rootScope.token = $localStorage.token;
+        $rootScope.$on('$routeChangeStart', function(event, next) {
+          if (next.loginRequired && !$rootScope.token) {
+            $location.path('/signin');
+          }
+        });
+      }
+    ]
+  );

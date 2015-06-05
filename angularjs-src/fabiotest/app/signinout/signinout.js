@@ -46,17 +46,13 @@ angular
               constants.URLS.SIGNIN,
               user
             )
-            .success(function(data, status) {
+            .success(function(data) {
               $localStorage.token = data.token;
               $rootScope.token = data.token;
               $location.path('/profile');
             })
-            .error(function(data, status) {
-              if(status == 400) {
-                $scope.serverErrors = data;
-              } else {
-                alert("Something goes wrong. Please try to reload page");
-              }
+            .error(function(data) {
+              $scope.serverErrors = data;
             });
         }
       }

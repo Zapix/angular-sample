@@ -57,3 +57,10 @@ docs/_build/
 target/
 db.sqlite3
 .idea/
+
+logs/*
+node_modules/
+bower_components/
+tmp
+.DS_Store
+.idea

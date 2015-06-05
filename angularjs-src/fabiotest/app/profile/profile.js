@@ -18,10 +18,26 @@ angular
             controller: 'ProfileCtrl',
             resolve: {
               profile: function($q, $http, constants) {
-                var deferred = $q.defer(); $http
+                var deferred = $q.defer();
+                $http
                   .get(constants.URLS.USER)
                   .success(function(data) {
                     deferred.resolve(data)
+                  });
+                return deferred.promise;
+              }
+            }
+          })
+          .when('/profile/change-password', {
+            templateUrl: 'profile/templates/change-password.html',
+            controller: 'ChangePasswordCtrl',
+            resolve: {
+              profile: function($q, $http, constants) {
+                var deferred = $q.defer();
+                $http
+                  .get(constants.URLS.USER)
+                  .success(function(data) {
+                    deferred.resolve(data);
                   });
                 return deferred.promise;
               }
@@ -72,6 +88,41 @@ angular
               }
             });
         }
+      }
+    ]
+  )
+  .controller(
+    'ChangePasswordCtrl',
+    [
+      '$scope',
+      '$http',
+      'constants',
+      'profile',
+      function($scope, $http, constants) {
+        $scope.passwordChanged = false;
+        $scope.serverErrors = {};
+
+        $scope.changePassword = function(form, data) {
+          if (!form.$valid || data.new_password1 != data.new_password2) {
+            return
+          }
+
+          $scope.passwordChanged = false;
+          $scope.serverErrors = {};
+          $http
+            .post(constants.URLS.CHANGE_PASSWORD, data)
+            .success(function() {
+              $scope.passwordChanged = true;
+              $scope.data = {};
+            })
+            .error(function(data, status) {
+              if (status == 400) {
+                $scope.serverErrors = data;
+              } else {
+                alert("Something goes wrong. Please try again");
+              }
+            });
+        };
       }
     ]
   );

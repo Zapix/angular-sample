@@ -49,7 +49,7 @@ angular
             .success(function(data, status) {
               $localStorage.token = data.token;
               $rootScope.token = data.token;
-              $location.path('/view1');
+              $location.path('/profile');
             })
             .error(function(data, status) {
               if(status == 400) {

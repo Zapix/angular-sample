@@ -14,11 +14,11 @@ angular
       function($routeProvider) {
         $routeProvider
           .when('/signup', {
-            templateUrl: 'signup/signup.html',
+            templateUrl: 'signup/templates/signup.html',
             controller: 'SignupCtrl'
           })
           .when('/signup-success', {
-            templateUrl: 'signup/success.html',
+            templateUrl: 'signup/templates/success.html',
             controller: 'SignupSuccessCtrl'
           });
       }

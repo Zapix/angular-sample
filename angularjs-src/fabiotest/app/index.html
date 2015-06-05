@@ -35,13 +35,13 @@
         <li><a href="#/view2">View2</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#/signup">Login</a></li>
-        <li><a href="#/signup">Sign Up</a></li>
+        <li ng-show="!token"><a href="#/signin">Login</a></li>
+        <li ng-show="!token"><a href="#/signup">Sign Up</a></li>
+        <li ng-show="token"><a href="#/signout" ng-click="logout()">Logout</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
 </nav>
-
 <div class="container" ng-view>
 </div><!-- /.container -->
   <!-- In production use:
@@ -49,6 +49,7 @@
   -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/ngstorage/ngStorage.min.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="app.js"></script>
@@ -56,6 +57,7 @@
   <script src="view1/view1.js"></script>
   <script src="view2/view2.js"></script>
   <script src="signup/signup.js"></script>
+  <script src="signinout/signin.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>

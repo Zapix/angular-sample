@@ -5,11 +5,13 @@ angular
   .module(
     'myApp',
     [
+      'ngStorage',
       'ngRoute',
       'myApp.constants',
       'myApp.view1',
       'myApp.view2',
       'myApp.signup',
+      'myApp.signinout',
       'myApp.version'
     ]
   )
@@ -20,4 +22,7 @@ angular
         $routeProvider.otherwise({redirectTo: '/view1'});
       }
     ]
-  );
+  )
+  .run(function($rootScope, $localStorage, $location) {
+    $rootScope.token = $localStorage.token;
+  });

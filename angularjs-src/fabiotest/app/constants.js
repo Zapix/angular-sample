@@ -10,7 +10,8 @@ angular
     function() {
       return {
         URLS: {
-          SIGNUP: 'http://localhost:8000/api/v1/register/'
+          SIGNUP: 'http://localhost:8000/api/v1/register/',
+          SIGNIN: 'http://localhost:8000/api-token-auth/'
         }
       };
     }

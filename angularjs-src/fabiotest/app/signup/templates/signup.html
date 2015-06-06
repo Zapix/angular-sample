@@ -23,6 +23,56 @@
   <div class="row">
     <div class="col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-12">
       <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          ng-model="user.email" />
+      </div>
+      <div ng-show="form.$submitted || form.email.$touched">
+        <div class="alert alert-danger" ng-show="form.email.$error.email">Enter valid email address.</div>
+        <div class="alert alert-danger" ng-repeat="error in serverErrors.email">{{ error }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-12">
+      <div class="form-group">
+        <label for="birthday">Birthday:</label>
+        <input
+          type="date"
+          id="birthday"
+          name="birthday"
+          class="form-control"
+          ng-model="user.birthday" />
+      </div>
+      <div ng-show="form.$submitted || form.birthday.$touched">
+        <div class="alert alert-danger" ng-show="form.birthday.$error.date">Enter valid date.</div>
+        <div class="alert alert-danger" ng-repeat="error in serverErrors.birthday">{{ error }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-12">
+      <div class="form-group">
+        <label for="book">Book:</label>
+        <input
+          type="text"
+          id="book"
+          name="book"
+          class="form-control"
+          ng-model="user.book" />
+      </div>
+      <div ng-show="form.$submitted || form.book.$touched">
+        <div class="alert alert-danger" ng-repeat="error in serverErrors.book">{{ error }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-12">
+      <div class="form-group">
         <label for="">Password:</label>
         <input
           type="password"

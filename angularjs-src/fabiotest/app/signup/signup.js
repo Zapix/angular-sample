@@ -38,10 +38,13 @@ angular
             return;
           }
           $scope.serverErros = {};
+          var data = angular.copy(user);
+          data.birthday = user.birthday && user.birthday.yyyymmdd();
+
           $http
             .post(
               constants.URLS.SIGNUP,
-              user
+              data
             )
             .success(function() {
               $location.path('/signup-success');

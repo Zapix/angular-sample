@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from rest_framework.test import APITestCase
 
 from .serializers import UserSerializer
+from .forms import ExtendedUserCreationForm
 
 
 class ChangePasswordTestCase(APITestCase):
@@ -63,6 +64,65 @@ class CreateUserTestCase(APITestCase):
             }
         )
         self.assertEquals(response.status_code, 400)
+
+
+class ExtendedUserCreationFormTestCase(APITestCase):
+
+    def test_simple_create(self):
+        form = ExtendedUserCreationForm(data={
+            'username': 'test',
+            'password1': 'test',
+            'password2': 'test'
+        })
+
+        self.assertTrue(form.is_valid())
+
+        user = form.save()
+
+        self.assertIsNotNone(user.pk)
+        self.assertEquals(user.username, 'test')
+
+    def test_user_with_email_create(self):
+        form = ExtendedUserCreationForm(data={
+            'username': 'test',
+            'email': 'test@gmail.com',
+            'password1': 'test',
+            'password2': 'test'
+        })
+
+        self.assertTrue(form.is_valid())
+
+        user = form.save()
+        self.assertEquals(user.email, 'test@gmail.com')
+
+    def test_user_with_book_create(self):
+        form = ExtendedUserCreationForm(data={
+            'username': 'test',
+            'password1': 'test',
+            'password2': 'test',
+            'book': 'thebook'
+        })
+
+        self.assertTrue(form.is_valid())
+
+        user = form.save()
+        book = user.books.first()
+
+        self.assertEquals(book.title, 'thebook')
+
+    def test_user_with_birthday(self):
+        form = ExtendedUserCreationForm(data={
+            'username': 'test',
+            'password1': 'test',
+            'password2': 'test',
+            'birthday': '2015-05-05'
+        })
+
+        self.assertTrue(form.is_valid())
+
+        user = form.save()
+
+        self.assertIsNotNone(user.profile.birthday)
 
 
 class BirthdayUpdateTestCae(APITestCase):

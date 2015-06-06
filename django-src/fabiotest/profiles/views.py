@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.forms import UserCreationForm
 
 from rest_framework import status
 from rest_framework import permissions
@@ -8,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import RetrieveUpdateAPIView, ListAPIView
 
+from .forms import ExtendedUserCreationForm
 from .serializers import UserSerializer
 from books.serializers import BookWithoutAuthorFieldSerializer
 
@@ -24,9 +24,10 @@ class UserView(RetrieveUpdateAPIView):
 class RegisterUserView(APIView):
 
     permission_classes = [permissions.AllowAny]
+    form_class = ExtendedUserCreationForm
 
     def post(self, request, *args, **kwargs):
-        form = UserCreationForm(request.data)
+        form = self.form_class(request.data)
 
         if form.is_valid():
             form.save()

@@ -33,6 +33,22 @@ angular
             templateUrl: 'profile/templates/change-password.html',
             controller: 'ChangePasswordCtrl',
             loginRequired: true
+          })
+          .when('/profile/books', {
+            templateUrl: 'profile/templates/book-list.html',
+            controller: 'ProfileBookListCtrl',
+            loginRequired: true,
+            resolve: {
+              bookList: function($q, $http, constants) {
+                var deferred = $q.defer();
+                $http
+                  .get(constants.URLS.USER_BOOK_LIST)
+                  .success(function(data) {
+                    deferred.resolve(data);
+                  });
+                return deferred.promise;
+              }
+            }
           });
       }
     ]
@@ -109,6 +125,16 @@ angular
               $scope.serverErrors = data;
             });
         };
+      }
+    ]
+  )
+  .controller(
+    'ProfileBookListCtrl',
+    [
+      '$scope',
+      'bookList',
+      function($scope, bookList) {
+        $scope.bookList = bookList;
       }
     ]
   );

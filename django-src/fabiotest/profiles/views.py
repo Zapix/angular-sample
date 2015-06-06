@@ -6,10 +6,10 @@ from rest_framework import status
 from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.generics import RetrieveUpdateAPIView
-from rest_framework.decorators import permission_classes as set_permissions
+from rest_framework.generics import RetrieveUpdateAPIView, ListAPIView
 
 from .serializers import UserSerializer
+from books.serializers import BookWithoutAuthorFieldSerializer
 
 
 class UserView(RetrieveUpdateAPIView):
@@ -51,3 +51,11 @@ class PasswordView(APIView):
             data=form.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
+
+
+class BookListView(ListAPIView):
+    serializer_class = BookWithoutAuthorFieldSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return self.request.user.books.all()

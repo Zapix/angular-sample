@@ -49,6 +49,10 @@ urlpatterns = [
         name='user-change-password'
     ),
     url(
+        r'^api/v1/user/books/',
+        profiles_views.BookListView.as_view()
+    ),
+    url(
         r'^api-auth/',
         include(
             'rest_framework.urls',

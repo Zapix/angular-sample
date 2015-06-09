@@ -85,14 +85,15 @@
         <div class="form-group">
           <label for="birthday"></label>
           <input
-            type="date"
+            type="text"
             id="birthday"
             name="birthday"
             class="form-control"
+            pattern="[0-9]{4}\-[0-1][0-9]\-[0-9]{2}"
             ng-model="editingProfile.birthday" />
         </div>
         <div ng-show="form.$submitted || form.birthday.$touched">
-          <div class="alert alert-danger" ng-show="form.birthday.$error.date">Please enter correct date. </div>
+          <div class="alert alert-danger" ng-show="form.birthday.$error.pattern">Please enter correct date. YYYY-MM-DD </div>
           <div class="alert alert-danger" ng-repeat="error in serverErrors.birthday">{{ error }}</div>
         </div>
       </div>

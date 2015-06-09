@@ -78,11 +78,9 @@ angular
             return;
           }
 
-          var data = angular.copy(profile);
-          data.birthday = profile.birthday && profile.birthday.yyyymmdd();
           $scope.serverErrors = {};
           $http
-            .put(constants.URLS.USER, data)
+            .put(constants.URLS.USER, profile)
             .success(function(data) {
               $scope.profile = data;
               $scope.editMode = false;
